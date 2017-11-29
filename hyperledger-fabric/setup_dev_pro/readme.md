@@ -8,7 +8,7 @@
 但是并没有给出解决方法。
 这个问题提示的**影响**：
 	无法执行make docker 或者make一些其他组件（peer，order和tools）时候会失败
-
+===========================
 [setup_dev](../setup_dev)过程中可能有一些问题：
 在执行第6步：vagrant.exe up过程中可能遇到的错误提示：
 	1.提示ubuntu/xenial64 下载timeout
