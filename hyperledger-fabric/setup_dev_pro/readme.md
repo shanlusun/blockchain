@@ -50,4 +50,7 @@ vagrant.exe provision
 ```Bash
 vagrant.exe ssh
 ```
+看到如下界面说明，一切工作正常：
+
+![success-1](https://github.com/shanlusun/blockchain/blob/master/hyperledger-fabric/setup_dev_pro/images/success-1.PNG "success-1")
 
