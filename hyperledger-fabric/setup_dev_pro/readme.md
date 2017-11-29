@@ -20,6 +20,7 @@
 	3.zookeeper版本3.4.9和kafka版本0.9.0.1已经不存在了
 
 如何解决：
+（**注意**：当前目录已经提供[Vagrantfile](./Vagrantfile)和[setup.sh](./setup.sh)，可以直接复制到fabric/devenv目录中使用）
 1.使用迅雷直接下载一个可用的ubuntu镜像，这里给出候选：https://vagrantcloud.com/hyperledger/boxes/fabric-baseimage/versions/0.3.0/providers/virtualbox.box
   将下载文件重命名为virtualbox.box，然后执行：
   ```Bash
@@ -41,3 +42,12 @@ $(lsb_release -cs) stable"
 3.修改[setup.sh](./setup.sh)，更新zookeeper和kafka的版本至存在的新版本
 
 此外建议GO的版本更新至1.9.2和Node的版本更新至8.9.0
+以上改动做完之后可以执行：
+```Bash
+vagrant.exe provision
+```
+最后再执行：
+```Bash
+vagrant.exe ssh
+```
+
