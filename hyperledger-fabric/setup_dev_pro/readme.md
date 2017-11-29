@@ -2,8 +2,11 @@
   ```Bash
   vagrant.exe ssh
   ```
+
 看到如下图片，说明本地环境有一点小问题：
+
 ![issue-1](https://github.com/shanlusun/blockchain/blob/master/hyperledger-fabric/setup_dev_pro/images/issue-1.PNG "issue-1")
+
 这个问题google一下会发现[Hyperledger官方有说明](https://github.com/hyperledger-archives/fabric/wiki/Troubleshooting-devenv-provisioning "Hyperledger官方说明")
 但是并没有给出解决方法。
 这个问题提示的**影响**：
