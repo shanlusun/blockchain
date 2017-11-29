@@ -11,9 +11,7 @@
 但是并没有给出解决方法。
 >这个问题提示的**影响**：
 >>无法在fabric目录执行make docker或make一些其他组件（peer，order和tools）
-
 ===========================
-
 [setup_dev](../setup_dev)过程中可能有一些问题：
 在执行第6步：vagrant.exe up过程中可能遇到的错误提示：
 
@@ -22,6 +20,7 @@
 3. zookeeper版本3.4.9和kafka版本0.9.0.1已经不存在了
 
 如何解决：
+----------
 >**注意**：
 >>当前目录已经提供[Vagrantfile](./Vagrantfile)和[setup.sh](./setup.sh)，可以直接复制到fabric/devenv目录中使用）
 
@@ -33,9 +32,9 @@
   修改[Vagrantfile](./Vagrantfile):
   ```diff
   -Vagrant.configure("2") do |config|
-    -config.vm.box = "ubuntu/xenial64"            
+  -   config.vm.box = "ubuntu/xenial64"            
   +Vagrant.configure("2") do |config|
-    +config.vm.box = "fabric"
+  +   config.vm.box = "fabric"
   ```
 2. 修改[setup.sh](./setup.sh)，增加阿里云repository：
   ```Bash
