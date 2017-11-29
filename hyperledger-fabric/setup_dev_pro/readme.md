@@ -11,7 +11,8 @@
 但是并没有给出解决方法。
 >这个问题提示的**影响**：
 >>无法在fabric目录执行make docker或make一些其他组件（peer，order和tools）
-===========================
+
+----------
 [setup_dev](../setup_dev)过程中可能有一些问题：
 在执行第6步：vagrant.exe up过程中可能遇到的错误提示：
 
