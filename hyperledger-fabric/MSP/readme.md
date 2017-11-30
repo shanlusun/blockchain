@@ -8,7 +8,7 @@ MSP 在[官方文档介绍](http://hyperledger-fabric.readthedocs.io/en/latest/g
 3. 联盟链会有新成员加入，此时MSP如何完成动态更新进而认证新的证书？或者说Fabric 官方wiki上面提到的Dynamic MSP是如何实现的？
 ----------------------
 >第一个问题：MSP在一个Transaction Flow中什么阶段起作用？怎么起作用？
-**回答**：MSP主要在Endorsing Peer 做Endorsement以及在Ordering Service上会被调用，对证书进行鉴定。
+>>**回答**：MSP主要在Endorsing Peer 做Endorsement以及在Ordering Service上会被调用，对证书进行鉴定。
 至于怎么起作用，下面用实际code来举出一个例子说明Membership Service实际应用场景：
 在做endorser时，在我们之前画的一个[Transaction Flow](https://github.com/shanlusun/blockchain/blob/master/hyperledger-fabric/TransactionFlow/Fabric-Transaction%20Flow.png "TX Flow")的流程图里面提到，Endorseing Peers 会 Verify signature，主要就是依赖MSP来完成。
 ----------------------
@@ -159,7 +159,7 @@ type Identity interface {
 
 
 >第二个问题： MSP对证书做鉴定时，是否与Fabric-CA有交互？如果没有，如何完成对证书的鉴定？MSP是否会检查一个证书有没有被回收（revocation）？
-**回答**： 目前从code来看MSP并没有与Fabric-CA交互，但不排除之后会增加这一交互。
+>>**回答**： 目前从code来看MSP并没有与Fabric-CA交互，但不排除之后会增加这一交互。
 code的注释中指出以后对证书的鉴定会增加更多严格的规则，判断依据：src\github.com\hyperledger\fabric\msp\mspimpl.go line 701开始**注释部分**
 ```go
 // getCertificationChainForBCCSPIdentity returns the certification chain of the passed bccsp identity within this msp
@@ -301,7 +301,7 @@ func (c *Certificate) Verify(opts VerifyOptions) (chains [][]*Certificate, err e
 ```
 
 >第三个问题：联盟链会有新成员加入，此时MSP如何完成动态更新进而认证新的证书？或者说Fabric 官方wiki上面提到的Dynamic MSP是如何实现的？
-**回答**： 目前MSP不支持动态local MSP的配置进而认证新的证书。从实际code和资料来看Dynamic MSP并没有实现。
+>>**回答**： 目前MSP不支持动态local MSP的配置进而认证新的证书。从实际code和资料来看Dynamic MSP并没有实现。
 参考以下细节：
 参考目前官方JIRA提交的ticket：[“As an infrastructure developer I want to be able to automate Local MSP update”](https://jira.hyperledger.org/browse/FAB-2072 "ticket")，已经提出需要“动态更新local MSP”的需求。
 Note：local MSP 是peer和orderer在本地config的一些MSP认证文件，包含CA和数字签名。(可以参考实例e2e_cli)
