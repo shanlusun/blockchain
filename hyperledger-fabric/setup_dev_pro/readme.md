@@ -1,11 +1,12 @@
 直接使用已经配置好开发环境的box
 -----------------------
-1.使用迅雷下载[fabric.box](https://pan.baidu.com/s/1mi9VINu "fabric.box")
-2.执行：
+1. 使用迅雷下载[fabric.box](https://pan.baidu.com/s/1mi9VINu "fabric.box")
+
+2. 执行：
   ```Bash
   vagrant.exe box add fabric.box  --name fabric
   ```
-3.修改[Vagrantfile](./Vagrantfile):
+3. 修改[Vagrantfile](./Vagrantfile):
   ```diff
   -Vagrant.configure("2") do |config|
   -   config.vm.box = "ubuntu/xenial64"            
@@ -18,14 +19,16 @@
   -./setup.sh
   ```
   将修改后的Vagrantfile复制到fabric/devenv目录覆盖原有文件
-4.在fabric/devenv目录执行：
+
+4. 在fabric/devenv目录执行：
   ```Bash
   vagrant.exe up
   ```
-5.在fabric/devenv目录执行：
+5. 在fabric/devenv目录执行：
   ```Bash
   vagrant.exe ssh
   ```
+
 
 适合执着完成setup的同学
 -----------------------
