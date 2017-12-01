@@ -1,6 +1,6 @@
 直接使用已经配置好开发环境的box
 -----------------------
-1. 使用迅雷下载[fabric.box](https://pan.baidu.com/s/1mi9VINu "fabric.box")
+1. 使用迅雷下载[fabric.box](https://pan.baidu.com/s/1mi9VINu "fabric.box")(https://pan.baidu.com/s/1mi9VINu)
 
 2. 执行：
   ```Bash
