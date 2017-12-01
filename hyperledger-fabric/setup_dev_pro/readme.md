@@ -1,7 +1,7 @@
 直接使用已经配置好开发环境的box
 -----------------------
 1. 参考[setup_dev](../setup_dev)的1~5步骤
-2. 使用迅雷下载fabric.box (https://pan.baidu.com/s/1mi9VINu)
+2. 下载fabric.box (https://pan.baidu.com/s/1mi9VINu)，
    然后执行：
   ```Bash
   vagrant.exe box add fabric.box  --name fabric
