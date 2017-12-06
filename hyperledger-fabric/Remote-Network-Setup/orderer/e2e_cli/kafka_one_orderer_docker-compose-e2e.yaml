@@ -1,0 +1,51 @@
+version: '2'
+
+services:
+  zookeeper:
+    image: hyperledger/fabric-zookeeper
+    restart: always
+    #volumes:
+      #- ./zookeeper/conf/:/conf/
+      #- ./zookeeper/data/:/data/
+      #- ./zookeeper/datalog/:/datalog/
+
+  kafka1:
+    image: hyperledger/fabric-kafka
+    restart: always
+    environment:
+      - KAFKA_BROKER_ID=0
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=1
+    volumes:
+      #- ./kafka1/kafka/:/opt/kafka/
+      - ./kafka1/kafka-logs/:/tmp/kafka-logs/
+    ports:
+      - '9092'
+    depends_on:
+      - zookeeper
+    links:
+      - zookeeper:zookeeper
+  
+  orderer.example.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.example.com
+    container_name: orderer.example.com
+    extra_hosts:
+        - "peer0.org1.example.com:101.200.80.233"
+        - "peer1.org1.example.com:123.56.133.49"
+        - "orderer.example.com:182.92.112.55"
+    environment:
+      # for Kafka
+      - CONFIGTX_ORDERER_ORDERERTYPE=kafka
+      #- ORDERER_GENERAL_ORDERERTYPE=solo
+      - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka1:9092]
+      - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
+      - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
+      - ORDERER_KAFKA_VERBOSE=true
+      - CONFIGTX_ORDERER_ADDRESSES=[127.0.0.1:7050]
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=orderer.example.com:7050
+    depends_on:
+      - zookeeper
+      - kafka1
+
