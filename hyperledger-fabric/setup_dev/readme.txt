@@ -11,7 +11,10 @@ Widnows环境配置:
   在GOPATH目录下面建立src，bin，pkg目录，在src目录下建立github.com\hyperledger目录
 
 3.下载 vagrant工具，并安装：https://www.vagrantup.com/downloads.html
+  注意：如果使用的是win10，建议安装2.0.0版本
+        如果使用的是win7，建议安装1.9.5版本
 4.下载 vitualbox并安装、运行：http://sw.bos.baidu.com/sw-search-sp/software/6bda11b7d3256/VirtualBox-5.1.30.18389-Win.exe
+  注意：win10或win7建议安装版本：5.1.30 18389
 5.进入 $GOPATH\src\github.com\hyperledger，执行：
   git clone https://github.com/hyperledger/fabric.git
   进入 $GOPATH\src\github.com\hyperledger\fabric，执行：
