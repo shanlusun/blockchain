@@ -1,5 +1,6 @@
 ##使用Openssl为已存在org新peer签发证书
 
+
 第一步：生成private key以及对应的csr文件
 -----------------------
 在Openssl-Sign-New-Certs目录下：
@@ -60,4 +61,4 @@ openssl ca -config ./openssl.cnf -in server.csr -out server.crt -notext
 
 第三步：使用新颁发的server.crt证书和server_sk私钥
 -----------------------
-构建新peer的msp目录使用新证书和私钥，即可
+构建新peer的msp目录使用新证书和私钥，即可。
