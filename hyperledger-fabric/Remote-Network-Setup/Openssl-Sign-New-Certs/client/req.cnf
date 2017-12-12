@@ -1,0 +1,81 @@
+#
+# OpenSSL example configuration file.
+# This is mostly being used for generation of certificate requests.
+#
+
+# This definition stops the following lines choking if HOME isn't
+# defined.
+HOME			= .
+RANDFILE		= $ENV::HOME/.rnd
+
+
+####################################################################
+[ req ]
+default_bits		= 256
+default_md		= sha256
+default_keyfile 	= privkey.pem
+distinguished_name	= req_distinguished_name
+attributes		= req_attributes
+
+req_extensions = v3_req # The extensions to add to a certificate request
+
+# Passwords for private keys if not present they will be prompted for
+# input_password = secret
+# output_password = secret
+
+# This sets a mask for permitted string types. There are several options. 
+# default: PrintableString, T61String, BMPString.
+# pkix	 : PrintableString, BMPString (PKIX recommendation before 2004)
+# utf8only: only UTF8Strings (PKIX recommendation after 2004).
+# nombstr : PrintableString, T61String (no BMPStrings or UTF8Strings).
+# MASK:XXXX a literal mask value.
+# WARNING: ancient versions of Netscape crash on BMPStrings or UTF8Strings.
+string_mask = utf8only
+#string_mask = pkix
+
+[ req_distinguished_name ]
+countryName			= Country Name (2 letter code)
+countryName_default		= US
+countryName_min			= 2
+countryName_max			= 2
+
+stateOrProvinceName		= State or Province Name (full name)
+stateOrProvinceName_default	= California
+
+localityName			= Locality Name (eg, city)
+localityName_default		= San Francisco
+
+0.organizationName		= Organization Name (eg, company)
+#0.organizationName_default	= Default Company Ltd
+
+# we can do this but it is not needed normally :-)
+#1.organizationName		= Second Organization Name (eg, company)
+#1.organizationName_default	= World Wide Web Pty Ltd
+
+organizationalUnitName		= Organizational Unit Name (eg, section)
+#organizationalUnitName_default	= org1.example.com # TODO:should be update for Prod
+
+commonName			= Common Name (eg, your name or your server\'s hostname)
+commonName_default		= peer0.org1.example.com # TODO:should be update for Prod
+commonName_max			= 64
+
+emailAddress			= Email Address
+emailAddress_max		= 64
+
+# SET-ex3			= SET extension number 3
+
+[ req_attributes ]
+challengePassword		= A challenge password
+challengePassword_min		= 4
+challengePassword_max		= 20
+
+unstructuredName		= An optional company name
+
+[ v3_req ]
+
+# Extensions to add to a certificate request
+extendedKeyUsage = serverAuth
+keyUsage = digitalSignature, keyEncipherment
+basicConstraints = CA:FALSE
+#subjectAltName=DNS:peer0.org1.example.com,DNS:peer0
+
