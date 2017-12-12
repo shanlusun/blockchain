@@ -23,7 +23,8 @@ npm install --global grpc
 npm install -g npm@5.2.0
 ```
 Widnows手动下载 jq工具: https://github.com/stedolan/jq/releases/download/jq-1.5/jq-win64.exe (其他版本 https://stedolan.github.io/jq/download/)
-手动复制到 C:\Program Files\Git\mingw64\bin\jq.exe，因为默认mingw64\bin路径已经添加系统环境变量，因此jq.exe 可以直接被调用。
+
+手动复制到 C:\Program Files\Git\mingw64\bin\jq.exe (因为默认mingw64\bin路径已经添加系统环境变量，因此jq.exe 可以直接被调用)
 
 4. 安装fabric-sample依赖的包
 在fabric-samples/balance-transfer目录执行：
