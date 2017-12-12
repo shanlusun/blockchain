@@ -1,4 +1,5 @@
-##Setup fabric-samples的运行环境
+Setup fabric-samples的运行环境
+-----------------------
 
 1. 安装 node (v8.9.0):
 https://nodejs.org/download/release/v8.9.0/ (其他版本 https://nodejs.org/en/download/releases/)
