@@ -1,8 +1,8 @@
 Setup fabric-samples的运行环境
 -----------------------
 
-1. 安装 node (v8.9.0):
-https://nodejs.org/download/release/v8.9.0/ (其他版本 https://nodejs.org/en/download/releases/)
+1. Windows安装 node (v8.9.0):
+https://nodejs.org/download/release/v8.9.0/node-v8.9.0-x64.msi (其他版本 https://nodejs.org/en/download/releases/)
 
 
 2. 拉取sample code，在$GOPATH\src\github.com/hyperledger目录执行：
