@@ -59,9 +59,8 @@ sunny@DESKTOP-UTTEQTU MINGW64 ~/OneDrive/github/blockchain/ethereum/hello_world_
 > compiledCode = solc.compile(code)
 ```
 **注意**：
-
-a. compiledCode.contracts[‘:Voting’].bytecode: 将来部署到blockchain的执行code
-b. compiledCode.contracts[‘:Voting’].interface: contract的接口(called [ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) 
+* compiledCode.contracts[‘:Voting’].bytecode: 将来部署到blockchain的执行code
+* compiledCode.contracts[‘:Voting’].interface: contract的接口(called [ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) 
 
 部署contract：
 ```javascript
@@ -73,11 +72,10 @@ b. compiledCode.contracts[‘:Voting’].interface: contract的接口(called [AB
 > contractInstance = VotingContract.at(deployedContract.address)
 ```
 **注意**：
-
-a. data: 可执行代码被部署到blockchain
-b. from: 为了可追溯的目的，需要提供账户，由于我们使用testrpc，因此这里不需要密码，否则密码是必须的
-c. gas: 需要耗费的gas值，被奖励给矿工
-d. deployedContract.address: 很关键，如果需要和部署的contract交互的时候，通过此地址即可找到目标contract
+* data: 可执行代码被部署到blockchain
+* from: 为了可追溯的目的，需要提供账户，由于我们使用testrpc，因此这里不需要密码，否则密码是必须的
+* gas: 需要耗费的gas值，被奖励给矿工
+* deployedContract.address: 很关键，如果需要和部署的contract交互的时候，通过此地址即可找到目标contract
 
 与部署好的contract交互：
 ```javascript
@@ -95,12 +93,11 @@ d. deployedContract.address: 很关键，如果需要和部署的contract交互�
 
 7. 与blockchain交互的Web页面
 
-[index.html](./index.html)
-
-[index.js](./index.js)
+* [index.html](./index.html)
+* [index.js](./index.js)
 
 **注意**：
-在step 6 提到过contract的部署地址很关键，这里需要更新一下[index.js](./index.js)，使用你的contract部署地址：
+* 在step 6 提到过contract的部署地址很关键，这里需要更新一下[index.js](./index.js)，使用你的contract部署地址：
 ```javascript
 contractInstance = VotingContract.at('0x26ce19747547179cfdcf7050f93a6a6f259d83dc');
 ```
