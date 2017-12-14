@@ -25,6 +25,7 @@
 可以看到，testrpc创建了10个测试账户，每个账户都有100个ethers
 
 4. 编写contract
+
 简单的[Voting](./Voting.sol)代码 
 
 5. 安装solc
@@ -60,8 +61,9 @@ sunny@DESKTOP-UTTEQTU MINGW64 ~/OneDrive/github/blockchain/ethereum/hello_world_
 > compiledCode = solc.compile(code)
 ```
 **注意**：
+
 a. compiledCode.contracts[‘:Voting’].bytecode: 将来部署到blockchain的执行code
-b. compiledCode.contracts[‘:Voting’].interface: contract的接口(called ABI：https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) 
+b. compiledCode.contracts[‘:Voting’].interface: contract的接口(called [ABI](https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) 
 
 部署contract：
 ```javascript
@@ -73,6 +75,7 @@ b. compiledCode.contracts[‘:Voting’].interface: contract的接口(called ABI
 > contractInstance = VotingContract.at(deployedContract.address)
 ```
 **注意**：
+
 a. data: 可执行代码被部署到blockchain
 b. from: 为了可追溯的目的，需要提供账户，由于我们使用testrpc，因此这里不需要密码，否则密码是必须的
 c. gas: 需要耗费的gas值，被奖励给矿工
@@ -93,6 +96,7 @@ d. deployedContract.address: 很关键，如果需要和部署的contract交互�
 ```
 
 7. 与blockchain交互的Web页面
+
 [index.html](./index.html)
 [index.js](./index.js)
 
