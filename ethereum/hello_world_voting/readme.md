@@ -24,9 +24,7 @@
 
 可以看到，testrpc创建了10个测试账户，每个账户都有100个ethers
 
-4. 编写contract
-
-简单的[Voting](./Voting.sol)代码 
+4. 编写contract: 简单的[Voting](./Voting.sol)代码 
 
 5. 安装solc
 ```Bash
@@ -98,6 +96,7 @@ d. deployedContract.address: 很关键，如果需要和部署的contract交互�
 7. 与blockchain交互的Web页面
 
 [index.html](./index.html)
+
 [index.js](./index.js)
 
 **注意**：
