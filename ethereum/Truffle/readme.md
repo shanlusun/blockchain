@@ -51,8 +51,8 @@ truffle(development)> web3.eth.getBalance('0x95a94979d86d9c32d1d2ab5ace2dcc8d1b4
 { [String: '0'] s: 1, e: 0, c: [ 0 ] }
 truffle(development)> web3.personal.unlockAccount('0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1', 'verystrongpassword', 15000)
 ```
-**注意**：其中web3.personal.unlockAccount第三个参数‘15000’是本次unlock的可用时间。
-geth也提供相似的[API](https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal_unlockaccount)，
+**注意**：其中web3.personal.unlockAccount第三个参数‘15000’是本次unlock的可用时间，
+geth也提供相似的[API](https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal_unlockaccount)
 
 9. 给testnet的account冲ether
 * 跟别人申请：[reddit](https://www.reddit.com/r/ethdev/comments/72ltwj/the_new_if_you_need_some_ropsten_testnet_ethers/?sort=new&limit=500)
