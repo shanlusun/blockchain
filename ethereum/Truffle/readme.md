@@ -61,7 +61,7 @@ geth也提供相似的[API](https://github.com/ethereum/go-ethereum/wiki/Managem
 nohup geth --testnet --datadir "/home/work/ethereum/data" --syncmode "fast" --cache=512 > geth.log 2>&1 
 
 geth attach /home/work/ethereum/data/geth.ipc
-miner.setEtherbase('0x39277f3d6cffbd59ed5178c3008fec4dfa100433')
+miner.setEtherbase('0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1')
 miner.start(4)
 ```
 
@@ -86,4 +86,42 @@ truffle(development)> Voting.deployed().then(function(contractInstance) {contrac
 ~/voting$ npm run dev
 ```
 **注意**：如果chrome安装了MetaMask插件的同学，第一次运行可以先关闭插件，运行成功之后在研究与MetaMask插件的交互。
+
+Dapp-voting升级版本：voting-pro
+-----------------------------
+1. unlockAccount
+```Bash
+~/voting-pro$ truffle console
+truffle(development)> web3.personal.unlockAccount('0x95a94979d86d9c32d1d2ab5ace2dcc8d1b446fa1', 'verystrongpassword', 15000)
+```
+**注意**：更新账户地址，密码
+
+2. 部署到testnet
+```Bash
+~/voting-pro$ truffle migrate
+Using network 'development'.
+
+Running migration: 2_deploy_contracts.js
+  Deploying Voting...
+  ... 0x546a05e9094a73f3660d063e3bcc805851544a48f16c6946f769e3ee9f23cc8c
+  Voting: 0xa154447aee1072c471ac43513c09b8e177503ed5
+Saving successful migration to network...
+  ... 0x8240ca1ed7d6418faa362802f590d8f080189e0b43cd47f9f526cc2c05c0e9a1
+Saving artifacts...
+
+```
+
+3. 终端交互：
+```Bash
+~/voting-pro$ truffle console
+truffle(development)> Voting.deployed().then(function(contract) {contract.buy({value: web3.toWei('1', 'ether'), from: web3.eth.accounts[0]})})
+```
+
+4. 使用web页面与contract交互
+```Bash
+~/voting-pro$ npm run dev
+```
+
+另外，关于truffle debug 请参考：http://truffleframework.com/docs/getting_started/debugging
+（可能遇到的错误参考：https://github.com/trufflesuite/truffle/issues/608）
 

@@ -7,7 +7,7 @@ module.exports = {
       host: 'localhost',
       port: 8545,
       network_id: '*', // Match any network id
-      gas: 470000 // The global gas value will be used by default, limit: 4728379
+      gas: 870000 // The global gas value will be used by default, limit: 4728379
     }
   },
   solc: {
