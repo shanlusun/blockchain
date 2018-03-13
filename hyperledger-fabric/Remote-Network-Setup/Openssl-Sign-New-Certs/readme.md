@@ -20,7 +20,7 @@ cp ec256.key server_sk  #**注意**：此server_sk为私钥，需要妥善保管
 openssl req -new -key ec256.pem -out server.csr -subj '/C=US/ST=California/L=San Francisco/CN=peer1.org1.example.com/O=new cert for peer1' -config ./client/req.cnf
 ```
 
-当前目录下的server.csr文件是申请证书的请求文件，使用CA来颁发可信证书cert.pem（MSP证书），同样方式可以签发TLS证书。
+当前目录下的server.csr文件是申请证书的请求文件，使用CA来颁发可信证书cert.pem（MSP证书），同样方式可以签发TLS证书。（查看：openssl req -in server.csr -noout -text）
 
 
 第二步：CA颁发的证书
