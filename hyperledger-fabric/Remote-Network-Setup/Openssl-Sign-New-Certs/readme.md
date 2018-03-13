@@ -53,11 +53,11 @@ openssl req -in server.csr -noout -text
 ```
 
 3. 签发证书
-在/etc/pki/CA/目录：
+在Openssl-Sign-New-Certs目录下：
 ```Bash
-openssl ca -config ./openssl.cnf -in server.csr -out server.crt -notext
+openssl ca -config ./ca-server/openssl.cnf -in server.csr -out server.crt -notext
 ```
-但前目录的server.crt文件就是签发后的证书，供使用。
+但前目录的server.crt文件就是签发后的证书，供使用。（查看证书：openssl x509 -in server.crt -text）
 
 
 第三步：使用新颁发的server.crt证书和server_sk私钥
