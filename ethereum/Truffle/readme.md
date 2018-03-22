@@ -125,3 +125,41 @@ truffle(development)> Voting.deployed().then(function(contract) {contract.buy({v
 另外，关于truffle debug 请参考：http://truffleframework.com/docs/getting_started/debugging
 （可能遇到的错误参考：https://github.com/trufflesuite/truffle/issues/608）
 
+
+使用第三方TRopsten Testnet Provider（无需本地geth同步区块）
+-----------------------------
+
+1. 安装依赖库
+
+```Bash
+~/voting$ npm install truffle-hdwallet-provider --save
+```
+
+2. 到 https://infura.io 注册获取api-key
+
+3. 在truffle.js的配置中，按照下面做相应修改
+```javascript
+var HDWalletProvider = require("truffle-hdwallet-provider");
+
+var infura_apikey = "XXXXXX"; //需要到https://infura.io注册，即可获得
+var mnemonic = "twelve words you can find in metamask/settings/reveal seed words blabla"; // 12个单词的助记词
+
+module.exports = {
+  networks: {
+    development: {
+      host: "localhost",
+      port: 8545,
+      network_id: "*" // Match any network id
+    },
+    ropsten: {
+      provider: new HDWalletProvider(mnemonic, "https://ropsten.infura.io/"+infura_apikey),
+      network_id: 3
+    }
+  }
+};
+```
+
+4. 部署合约到 Ropsten network
+```Bash
+~/voting$ truffle migrate --network ropsten
+```
