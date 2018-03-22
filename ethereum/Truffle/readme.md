@@ -134,6 +134,7 @@ truffle(development)> Voting.deployed().then(function(contract) {contract.buy({v
 ```Bash
 ~/voting$ npm install truffle-hdwallet-provider --save
 ```
+注意：truffle-hdwallet-provider 依赖Python 3.6
 
 2. 到 https://infura.io 注册获取api-key
 
@@ -163,3 +164,14 @@ module.exports = {
 ```Bash
 ~/voting$ truffle migrate --network ropsten
 ```
+
+5. 使用MetaMask提交Transaction
+注释掉app/index.html 第37行，不再加载cdn的web3，使用metamask的web3
+<!-- <script src="https://cdn.jsdelivr.net/npm/web3@0.20.1/dist/web3.js"></script> -->
+
+6. 运行
+```Bash
+~/voting$ npm run dev
+```
+
+7. 登陆MetaMask，浏览器打开页面 http://localhost:8080/
