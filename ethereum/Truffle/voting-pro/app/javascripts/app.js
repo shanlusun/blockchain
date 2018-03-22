@@ -35,7 +35,7 @@ window.voteForCandidate = function(candidate) {
    * everywhere we have a transaction call
    */
   Voting.deployed().then(function(contractInstance) {
-    contractInstance.voteForCandidate(candidateName, voteTokens, {gas: 47000, from: web3.eth.accounts[0]}).then(function() {
+    contractInstance.voteForCandidate(candidateName, voteTokens, {gas: 470000, from: web3.eth.accounts[0]}).then(function() {
       let div_id = candidates[candidateName];
       return contractInstance.totalVotesFor.call(candidateName).then(function(v) {
         $("#" + div_id).html(v.toString());

@@ -1,5 +1,6 @@
 pragma solidity ^0.4.17; //We have to specify what version of the compiler this code will use
 
+// already deployed one contract address:0xA154447Aee1072c471AC43513C09B8E177503Ed5
 contract Voting {
 
   // We use the struct datatype to store the voter information.
