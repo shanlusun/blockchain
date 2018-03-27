@@ -70,7 +70,7 @@ Saving successful migration to network...
   ... 0xf36163615f41ef7ed8f4a8f192149a0bf633fe1a2398ce001bf44c43dc7bdda0
 Saving artifacts...
 ```
-注意：如果退出truffle console，重新进入需要再次运行：migrate --reset
+**注意**：如果退出truffle console，重新进入需要再次运行：migrate --reset
 
 7. 与合约交互：
 
@@ -114,6 +114,7 @@ Connected to existing Truffle Develop session at http://127.0.0.1:9545/
 truffle(develop)> SimpleStorage.deployed().then(function(instance){return instance.set(4);});
 ```
 * 查看truffle 日志终端：
+```Bash
 2018-03-27T06:03:20.668Z develop:testrpc eth_sendTransaction
 2018-03-27T06:03:23.560Z develop:testrpc
 2018-03-27T06:03:23.560Z develop:testrpc   **Transaction: 0x8a7d3343dd2aaa0438157faae678ca57cc6485825bb4ed2ebefe90609dd268ce**
@@ -122,6 +123,7 @@ truffle(develop)> SimpleStorage.deployed().then(function(instance){return instan
 2018-03-27T06:03:23.560Z develop:testrpc   Block Time: Tue Mar 27 2018 14:03:20 GMT+0800 (中国标准时间)
 2018-03-27T06:03:23.560Z develop:testrpc   Runtime Error: out of gas
 2018-03-27T06:03:23.560Z develop:testrpc
+```
 
 * debug问题：truffle debug <Transaction ID>
 ```Bash
@@ -129,7 +131,7 @@ truffle(develop)> debug 0x8a7d3343dd2aaa0438157faae678ca57cc6485825bb4ed2ebefe90
 ```
 
 终端输出如下：
-
+```Bash
 Gathering transaction data...
 
 Addresses affected:
@@ -153,5 +155,6 @@ Store.sol:
    ^^^^^^^^^^^^^^^^^^^^^^^^
 
 debug(develop:0xd7ff6d16...)>
+```
 
-可以按照命令，单步执行调试了。
+可以按照命令，单步执行调试，并print堆栈信息。
