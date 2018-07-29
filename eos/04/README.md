@@ -182,3 +182,29 @@ cleos get account token --json
 ```
 
 
+**04-启动连接主网的节点**
+----------------------------------------------
+
+使用docker-compose-main-net-v1.0.5.yaml文件启动节点，注意此文件依赖：[genesis.json](./genesis.json) 和 [config-main-net.ini](./config-main-net.ini)文件。
+
+启动连接主网的节点：
+```Bash
+docker-compose -f docker-compose-main-net-v1.0.5.yaml up -d
+```
+注意cleos的alias稍有变化：
+```Bash
+alias cleos='docker-compose -f docker-compose-main-net-v1.0.5.yaml exec keosd /opt/eosio/bin/cleos -u http://nodeosd:8888 --wallet-url http://localhost:8900'
+```
+**注意**：以上启动的节点中使用的Keys是公开的测试账户，私钥已经暴露，十分不安全，仅作为学习、实验参考。同样万不可导入个人真实私钥去连接主网，或启动节点！谨记！
+
+**04-使用已存在的超级节点**
+----------------------------------------------
+同样启动keosd，使用docker-compose-main-net-v1.0.5.yaml即可。
+注意下面将cleos命令中的 http://nodeosd:8888 替换成了某个超级节点的地址http://40.114.68.16:8888
+```Bash
+alias cleos='docker-compose -f docker-compose-main-net-v1.0.5.yaml exec keosd /opt/eosio/bin/cleos -u http://40.114.68.16:8888 --wallet-url http://localhost:8900'
+```
+**注意**：一定要注意选择安全的前21个超级节点，此外这样使用的安全性仍有待验证，大家可以使用超级节点来做查询，不要通过此方式提交任何交易。
+
+
+
