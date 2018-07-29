@@ -12,6 +12,7 @@
 * 内存 > 4GB
 
 1. **安装docker和docker-compose**
+
 可以到[Docker官方网站](https://www.docker.com/community-edition)下载Docker，推荐以下版本:
 ![docker-version](./images/docker-version.jpg "docker-version")
 下载安装后，启动Docker服务，不同的系统启动Docker服务方式不同，请具体查看启动方式。
@@ -46,6 +47,7 @@ docker-compose version 1.21.2, build a133471
 ```
 
 2. **获得eos的Docker Image**
+
 eos的Docker Image 有多种版本，适应于不同的应用场景：
 * eosio/builder : 包含编译eos的所有依赖库，是eos编译的一个完整环境，这样开发者就无需安装各种工具和依赖库，准备eos的编译环境了。
 * eosio/eos : 主网节点使用，比较轻量级，镜像中不包含编译智能合约的依赖库。
@@ -72,6 +74,7 @@ docker build . -t eosio/eos-dev:latest
 
 
 3. **启动本地节点的测试环境**
+
 创建volume，供nodeos和keosd挂载使用:
 ```Bash
 docker volume create --name=nodeos-data-volume
@@ -92,6 +95,7 @@ docker logs -f docker_nodeosd_1
 
 
 4. **给cleos命令配置alias**
+
 由于我们不希望每次执行cleos命令都进入docker container中执行，因此我们配置了简短的cleos的alias来代替docker命令：
 ```Bash
 alias cleos='docker-compose -f docker-compose-local-eosio1.0.yaml exec keosd /opt/eosio/bin/cleos -u http://nodeosd:8888 --wallet-url http://localhost:8900'
@@ -146,6 +150,7 @@ $cleos wallet keys
 ```
 
 6. **创建账户(Account)**
+
 创建一个账户叫做token 使用上面定义的两个公钥分别做OwnerKey和ActiveKey：
 ```Bash
 cleos create account eosio token EOS8eHNwPjCvcQRnUP1feykKmKexWkRz5zXznK3GTJFPibut7kiaM EOS7UN5ZY6WYpVhjkjPG4bh5rQxHgAeFKnjLBNok22cATD82JPjai
