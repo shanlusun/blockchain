@@ -11,7 +11,7 @@
 * 硬盘存储空间 > 8GB
 * 内存 > 4GB
 
-1. 安装docker和docker-compose
+1. **安装docker和docker-compose**
 可以到[Docker官方网站](https://www.docker.com/community-edition)下载Docker，推荐以下版本:
 ![docker-version](./images/docker-version.jpg "docker-version")
 下载安装后，启动Docker服务，不同的系统启动Docker服务方式不同，请具体查看启动方式。
@@ -45,7 +45,7 @@ $docker-compose -v
 docker-compose version 1.21.2, build a133471
 ```
 
-2. 获得eos的Docker Image
+2. **获得eos的Docker Image**
 eos的Docker Image 有多种版本，适应于不同的应用场景：
 * eosio/builder : 包含编译eos的所有依赖库，是eos编译的一个完整环境，这样开发者就无需安装各种工具和依赖库，准备eos的编译环境了。
 * eosio/eos : 主网节点使用，比较轻量级，镜像中不包含编译智能合约的依赖库。
@@ -71,7 +71,7 @@ docker build . -t eosio/eos-dev:latest
 >>如果不对eos/Docker/dev/Dockerfile 做修改的情况下，使用的事master分支的代码构建的Image，如果想制定release的版本，可以参考我们给出的[Dockerfile样例](./dev/Dockerfile)
 
 
-3. 启动本地节点的测试环境
+3. **启动本地节点的测试环境**
 创建volume，供nodeos和keosd挂载使用:
 ```Bash
 docker volume create --name=nodeos-data-volume
@@ -91,7 +91,7 @@ docker logs -f docker_nodeosd_1
 ![nodeosd-log](./images/nodeosd-log.jpg "nodeosd-log") 
 
 
-4. 给cleos命令配置alias
+4. **给cleos命令配置alias**
 由于我们不希望每次执行cleos命令都进入docker container中执行，因此我们配置了简短的cleos的alias来代替docker命令：
 ```Bash
 alias cleos='docker-compose -f docker-compose-local-eosio1.0.yaml exec keosd /opt/eosio/bin/cleos -u http://nodeosd:8888 --wallet-url http://localhost:8900'
@@ -103,12 +103,13 @@ cleos get info
 ```
 ![cleos-get-info](./images/cleos-get-info.jpg "cleos-get-info")
 **注意**
->>以后cleos命令的执行必须在docker-compose-local-eosio1.0.yaml文件所在目录才可以。
+>以后cleos命令的执行必须在docker-compose-local-eosio1.0.yaml文件所在目录才可以。
 
 
-5. 创建Wallet和Keys
+5. **创建Wallet和Keys**
+
 **注意**
->>以下命令的执行结果都需要记录备份，以后会用到其中的Wallet密码、私钥以及公钥地址
+>以下命令的执行结果都需要记录备份，以后会用到其中的Wallet密码、私钥以及公钥地址
 
 * 创建Wallet：
 ```Bash
@@ -144,7 +145,7 @@ $cleos wallet keys
 ]
 ```
 
-6. 创建账户(Account)
+6. **创建账户(Account)**
 创建一个账户叫做token 使用上面定义的两个公钥分别做OwnerKey和ActiveKey：
 ```Bash
 cleos create account eosio token EOS8eHNwPjCvcQRnUP1feykKmKexWkRz5zXznK3GTJFPibut7kiaM EOS7UN5ZY6WYpVhjkjPG4bh5rQxHgAeFKnjLBNok22cATD82JPjai
@@ -157,7 +158,7 @@ warning: transaction executed locally, but may not be confirmed by the network y
 ```
 
 **注意**
->>如果执行以上create account命令可能遇到如下错误：
+>如果执行以上create account命令可能遇到如下错误：
 ```Bash
 Error:
 Error 3090003: provided keys, permissions, and delays do not satisfy declared authorizations
