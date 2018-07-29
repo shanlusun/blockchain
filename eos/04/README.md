@@ -68,7 +68,7 @@ docker tag eosio/eos-dev:v1.0.8 eosio/eos-dev:latest
 docker build . -t eosio/eos-dev:latest
 ```
 **注意**
-如果不对eos/Docker/dev/Dockerfile 做修改的情况下，使用的事master分支的代码构建的Image，如果想制定release的版本，可以参考我们给出的[Dockerfile样例](./dev/Dockerfile)
+>>如果不对eos/Docker/dev/Dockerfile 做修改的情况下，使用的事master分支的代码构建的Image，如果想制定release的版本，可以参考我们给出的[Dockerfile样例](./dev/Dockerfile)
 
 
 3. 启动本地节点的测试环境
@@ -103,14 +103,14 @@ cleos get info
 ```
 ![cleos-get-info](./images/cleos-get-info.jpg "cleos-get-info")
 **注意**
-以后cleos命令的执行必须在docker-compose-local-eosio1.0.yaml文件所在目录才可以。
+>>以后cleos命令的执行必须在docker-compose-local-eosio1.0.yaml文件所在目录才可以。
 
 
 5. 创建Wallet和Keys
 **注意**
-以下命令的执行结果都需要记录备份，以后会用到其中的Wallet密码、私钥以及公钥地址
+>>以下命令的执行结果都需要记录备份，以后会用到其中的Wallet密码、私钥以及公钥地址
 
-a.创建Wallet：
+* 创建Wallet：
 ```Bash
 $cleos wallet create
 
@@ -119,13 +119,13 @@ Save password to use in the future to unlock this wallet.
 Without password imported keys will not be retrievable.
 "#######################PASSWORD######################"
 ```
-b.创建第一个密钥对(OwnerKey)
+* 创建第一个密钥对(OwnerKey)
 ```Bash
 $cleos create key   # OwnerKey 
 Private key: 5Kk7fphGmYmMxDG2x2ekge3uwe5KLSXXy23gKFAir6ZZEEJ3yEF
 Public key: EOS8eHNwPjCvcQRnUP1feykKmKexWkRz5zXznK3GTJFPibut7kiaM
 ```
-c.创建第二个密钥对(ActiveKey)
+* 创建第二个密钥对(ActiveKey)
 ```Bash
 $cleos create key   # ActiveKey
 
@@ -133,7 +133,7 @@ Private key: 5JHbXvvJwadv9p814t6111P8LRwB6Dvg5iutsKnBhSuoCrb9qDy
 Public key: EOS7UN5ZY6WYpVhjkjPG4bh5rQxHgAeFKnjLBNok22cATD82JPjai
 ```
 
-d.检查当前Wallet包含的Keys
+* 检查当前Wallet包含的Keys
 ```Bash
 $cleos wallet keys
 
@@ -157,10 +157,12 @@ warning: transaction executed locally, but may not be confirmed by the network y
 ```
 
 **注意**
-如果执行以上create account命令可能遇到如下错误：
+>>如果执行以上create account命令可能遇到如下错误：
+```Bash
 Error:
 Error 3090003: provided keys, permissions, and delays do not satisfy declared authorizations
 Ensure that you have the related private keys inside your wallet and your wallet is unlocked.
+```
 
 此error 需要 import config.ini 中默认的签名账户private key：
 ```Bash
