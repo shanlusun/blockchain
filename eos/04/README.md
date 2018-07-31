@@ -109,6 +109,11 @@ cleos get info
 **注意**
 >以后cleos命令的执行必须在docker-compose-local-eosio1.0.yaml文件所在目录才可以。
 
+此时也可以通过http的请求，直接访问查询：
+```Bash
+curl http://localhost:8888/v1/chain/get_info
+```
+
 
 5. **创建Wallet和Keys**
 
@@ -124,17 +129,51 @@ Save password to use in the future to unlock this wallet.
 Without password imported keys will not be retrievable.
 "#######################PASSWORD######################"
 ```
+
+如果一个Wallet不够用，可以再创建新的Wallet：
+```Bash
+$cleos wallet create -n 2ndWallet
+
+Creating wallet: 2ndWallet
+Save password to use in the future to unlock this wallet.
+Without password imported keys will not be retrievable.
+"#######################PASSWORD######################"
+```
+**注意**：解锁非默认钱包时候需要加-n参数：
+```Bash
+cleos wallet unlock -n 2ndWallet 
+```
+
+* 备份Wallet
+Wallet文件在哪里？
+进入keosd的container：
+```Bash
+docker exec -it docker_keosd_1 bash
+```
+进入Wallet文件所在目录：
+```Bash
+cd /opt/eosio/bin/data-dir
+```
+查看此目录：
+```Bash
+$ls
+2ndWallet.wallet  default.wallet
+```
+因此可以在宿主机器使用docker cp命令导出wallet文件了。
+此备份文件本身是经过加密的，感兴趣同学可以学习使用eosjs-ecc离线单独完成解密，而不需要依赖Wallet，请[参考](https://github.com/EOSIO/eosjs-ecc/issues/10)。
+
+
 * 创建第一个密钥对(OwnerKey)
 ```Bash
 $cleos create key   # OwnerKey 
-Private key: 5Kk7fphGmYmMxDG2x2ekge3uwe5KLSXXy23gKFAir6ZZEEJ3yEF
+Private key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 Public key: EOS8eHNwPjCvcQRnUP1feykKmKexWkRz5zXznK3GTJFPibut7kiaM
 ```
 * 创建第二个密钥对(ActiveKey)
 ```Bash
 $cleos create key   # ActiveKey
 
-Private key: 5JHbXvvJwadv9p814t6111P8LRwB6Dvg5iutsKnBhSuoCrb9qDy
+Private key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 Public key: EOS7UN5ZY6WYpVhjkjPG4bh5rQxHgAeFKnjLBNok22cATD82JPjai
 ```
 
@@ -148,6 +187,11 @@ $cleos wallet keys
   "EOS8eHNwPjCvcQRnUP1feykKmKexWkRz5zXznK3GTJFPibut7kiaM"
 ]
 ```
+同样可以同时查询公钥、私钥，但是需要Wallet密码：
+```Bash
+cleos wallet private_keys
+```
+
 
 6. **创建账户(Account)**
 
@@ -170,17 +214,24 @@ Error 3090003: provided keys, permissions, and delays do not satisfy declared au
 Ensure that you have the related private keys inside your wallet and your wallet is unlocked.
 ```
 
-此error 需要 import config.ini 中默认的签名账户private key：
+此error 需要 import config.ini 中默认的eosio签名账户private key：
 ```Bash
 cleos wallet import 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 ```
 然后再重新执行create account的命令即可。
+**原因**：eosio是authorizing account（授权帐户）。 在区块链上执行的操作必须使用与eosio帐户关联的密钥对进行签名。 eosio帐户是用于引导EOSIO节点的特殊帐户。
 
 查看刚创建的账户：
 ```Bash
 cleos get account token --json
 ```
 
+同样可以查看主账户eosio：
+```Bash
+cleos get account eosio --json
+```
+
+关于以上内容，EOS官方最近也给出[教程](https://developers.eos.io/eosio-nodeos/docs/learn-about-wallets-keys-and-accounts-with-cleos)可供参考（不使用docker）。
 
 **04-启动连接主网的节点**
 ----------------------------------------------
