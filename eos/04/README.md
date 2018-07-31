@@ -77,9 +77,9 @@ docker build . -t eosio/eos-dev:latest
 
 创建volume，供nodeos和keosd挂载使用:
 ```Bash
-docker volume create --name=nodeos-data-volume
+docker volume create --name=local-nodeos-data-volume
 
-docker volume create --name=keosd-data-volume
+docker volume create --name=local-keosd-data-volume
 ```
 
 在blockchain/eos/04/docker目录下，启动nodeos和keosd：
