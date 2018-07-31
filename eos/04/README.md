@@ -144,31 +144,13 @@ Without password imported keys will not be retrievable.
 cleos wallet unlock -n 2ndWallet 
 ```
 
-* 备份Wallet
-Wallet文件在哪里？
-进入keosd的container：
-```Bash
-docker exec -it docker_keosd_1 bash
-```
-进入Wallet文件所在目录：
-```Bash
-cd /opt/eosio/bin/data-dir
-```
-查看此目录：
-```Bash
-$ls
-2ndWallet.wallet  default.wallet
-```
-因此可以在宿主机器使用docker cp命令导出wallet文件了。
-此备份文件本身是经过加密的，感兴趣同学可以学习使用eosjs-ecc离线单独完成解密，而不需要依赖Wallet，请[参考](https://github.com/EOSIO/eosjs-ecc/issues/10)。
-
-
 * 创建第一个密钥对(OwnerKey)
 ```Bash
 $cleos create key   # OwnerKey 
 Private key: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 Public key: EOS8eHNwPjCvcQRnUP1feykKmKexWkRz5zXznK3GTJFPibut7kiaM
 ```
+
 * 创建第二个密钥对(ActiveKey)
 ```Bash
 $cleos create key   # ActiveKey
@@ -192,8 +174,26 @@ $cleos wallet keys
 cleos wallet private_keys
 ```
 
+6. **备份Wallet**
 
-6. **创建账户(Account)**
+Wallet文件在哪里？
+进入keosd的container：
+```Bash
+docker exec -it docker_keosd_1 bash
+```
+进入Wallet文件所在目录：
+```Bash
+cd /opt/eosio/bin/data-dir
+```
+查看此目录：
+```Bash
+$ls
+2ndWallet.wallet  default.wallet
+```
+因此可以在宿主机器使用docker cp命令导出wallet文件了。
+此备份文件本身是经过加密的，感兴趣同学可以学习使用eosjs-ecc离线单独完成解密，而不需要依赖Wallet，请[参考](https://github.com/EOSIO/eosjs-ecc/issues/10)。
+
+7. **创建账户(Account)**
 
 创建一个账户叫做token 使用上面定义的两个公钥分别做OwnerKey和ActiveKey：
 ```Bash
