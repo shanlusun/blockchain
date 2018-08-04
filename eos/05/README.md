@@ -101,12 +101,13 @@ warning: transaction executed locally, but may not be confirmed by the network y
 ---------------------------------------------
 
 EOS的数据库，是按照如下层级空间管理的：
-* EOS.IO organizes data according to the following broad structure:
-* 
-* — **code** — the account name which has write permission
-*    — **scope** — an account where the data is stored
-*       — **table** — a name for the table that is being stored
-*          — **record** — a row in the table
+
+EOS.IO organizes data according to the following broad structure:
+ 
+ — **code** — the account name which has write permission
+    — **scope** — an account where the data is stored
+       — **table** — a name for the table that is being stored
+          — **record** — a row in the table
 参考：https://developers.eos.io/eosio-cpp/docs/multi-index-table-tutorial 
 
 1. **生成wast和abi文件**
