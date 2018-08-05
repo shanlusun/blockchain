@@ -24,7 +24,7 @@ alias eosiocpp='docker-compose -f docker-compose-local-eosio1.0.yaml exec keosd 
 **什么是ABI？**
 >ABI是Application Binary Interface的缩写，它的意思是程序二进制接口。 一个ABI是不同二进制片段的连接纽带。 它定义了函数被调用的规则：参数在调用者和被调用者之间如何传递，返回值怎么提供给调用者，库函数怎么被应用，以及程序怎么被加载到内存。 因此ABI是用来约束链接器的：一个ABI是无关的代码如何在一起工作的规则。
 
-**注意**：EOS中的ABI出了约束action之外，还可以约束table，详细(可参考)[https://medium.com/fueled-engineering/exploring-the-eos-multi-index-database-557769b1b7a6]。
+**注意**：EOS中的ABI出了约束action之外，还可以约束table，详细[可参考](https://medium.com/fueled-engineering/exploring-the-eos-multi-index-database-557769b1b7a6)
 
 
 接下来开始合约之旅：
@@ -97,28 +97,6 @@ warning: transaction executed locally, but may not be confirmed by the network y
 ```
 
 
-**05-EOS数据库**
----------------------------------------------
-
-EOS的数据库，是按照如下层级空间管理的：
-
-EOS.IO organizes data according to the following broad structure:
- >— **code** — the account name which has write permission
- >>   — **scope** — an account where the data is stored
- >>>      — **table** — a name for the table that is being stored
- >>>>         — **record** — a row in the table
-参考：https://developers.eos.io/eosio-cpp/docs/multi-index-table-tutorial 
-
-1. **生成wast和abi文件**
-
-2. **部署appdemo**
-
-```Bash
-cleos set contract eosio /contracts/appdemo/ /contracts/appdemo/appdemo.wast /contracts/appdemo/appdemo.abi -p eosio@active
-
-```
-
-3. **执行合约方法**
 
 
 **参考文献**
