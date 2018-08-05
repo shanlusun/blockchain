@@ -35,11 +35,13 @@ EOS的数据库，按照如下层级空间管理的：
  >    - **scope** - an area where the data is stored
  >       - **table** - a name for the table that is being stored
  >          - **record** - a row in the table
+
 [参考](https://developers.eos.io/eosio-cpp/docs/multi-index-table-tutorial)
 [源代码](https://github.com/EOSIO/eos/blob/v1.0.8/contracts/eosiolib/db.h)
 
 
 **multi_index类模板**
+
 代码路径：eos/contracts/eosiolib/multi_index.hpp    line:154
 ```c++
 template<uint64_t TableName, typename T, typename... Indices>
@@ -54,6 +56,7 @@ class multi_index {
 
 
 **multi_index构造函数**
+
 代码路径：eos/contracts/eosiolib/multi_index.hpp  line:644
 ```c++
 multi_index( uint64_t code, uint64_t scope )
@@ -68,6 +71,7 @@ multi_index构造函数有两个参数：code和scope，都是uint64_t类型，�
 
 
 **多索引数据库的智能合约样例**
+
 >TODO
 更多可参考[官网原文](https://eosio-cpp.readme.io/docs/multi-index-table-tutorial)
 
