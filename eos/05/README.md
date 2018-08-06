@@ -64,7 +64,7 @@ Ensure that you have created a wallet and have it open
 4. **调用合约方法**
 
 ```Bash
-cleos push action hello hi '["user"]' -p eosio@active 
+cleos push action eosio hi '["user"]' -p eosio@active 
 ```
 
 5. **合约权限验证**
@@ -78,7 +78,7 @@ void hi( account_name user ) {
 ```
 再次调用方法‘hi’：
 ```Bash
-$cleos push action hello hi '["user"]' -p eosio@active
+$cleos push action eosio hi '["user"]' -p eosio@active
 
 Error 3090004: missing required authority
 Ensure that you have the related authority inside your transaction!;
