@@ -3,7 +3,7 @@ version: "3"
 services:
   nodeosd:
     image: eosio/eos-dev:latest
-    command: /opt/eosio/bin/nodeosd.sh --data-dir /opt/eosio/bin/data-dir #-e --delete-all-blocks #--genesis-json /opt/eosio/bin/data-dir/genesis.json #--contracts-console #-e — Enable block production, even if the chain is stale
+    command: /opt/eosio/bin/nodeosd.sh --data-dir /opt/eosio/bin/data-dir -e --delete-all-blocks #--genesis-json /opt/eosio/bin/data-dir/genesis.json #--contracts-console #-e — Enable block production, even if the chain is stale
     hostname: nodeosd
     ports:
       - 8888:8888

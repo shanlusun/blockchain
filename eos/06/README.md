@@ -16,6 +16,7 @@
 sh build_release.sh eosio /hello
 ```
 **注意**：此脚本不会帮助检查输入的合约目录是否存在，感兴趣同学可以增加此判断，如果合约目录不存在，即使用‘eosiocpp -n’来创建默认sample合约。
+
 部署之后，可以做后续的合约调用。
 
 
@@ -117,8 +118,8 @@ int main (void) {
 	std::cout << "rr1  = " << rr1  << std::endl;
 	std::cout << "rr2  = " << rr2  << std::endl;
 	
-    std::cout << "lr  address  = " << &lr  << std::endl;
-    std::cout << "rr2 address  = " << &rr2  << std::endl;
+	std::cout << "lr  address  = " << &lr  << std::endl;
+	std::cout << "rr2 address  = " << &rr2  << std::endl;
 	
 	int val = 10;
 	auto lambda = [&] () -> int { return val * 100; };
@@ -135,7 +136,48 @@ sh build_release.sh eosio /appdemo
 ```
 
 2. **执行合约方法**
+```Bash
+cleos push action eosio create '["eosio","sunny","20","My bio"]' -p eosio@active
+```
 
+3. **操作table**
+
+>查看table
+```Bash
+$cleos get table eosio eosio profile
+
+{
+  "rows": [{
+      "account": "eosio",
+      "username": "sunny",
+      "age": 20,
+      "bio": "My bio"
+    }
+  ],
+  "more": false
+}
+```
+
+>调用get方法
+```Bash
+$cleos push action eosio get '["eosio"]' -p eosio@active
+
+executed transaction: c188b7d7a122e14f028e2d14780f9485a20b6bf02a1daa673c9c0e6e2c509f1f  104 bytes  1461 us
+#         eosio <= eosio::get                   {"account":"eosio"}
+>> Account: eosio , Username: sunny , Age: 20 , Bio: My bio
+warning: transaction executed locally, but may not be confirmed by the network yet
+```
+
+>调用byage方法，使用自定义index
+```Bash
+$cleos push action eosio byage '["15"]' -p eosio@active
+
+executed transaction: d28f565ba80ef36b67803cadcd2d6d63837b05d5026a79c134bff2d4f88fa1bb  96 bytes  1177 us
+#         eosio <= eosio::byage                 {"age":15}
+>> Checking age: 15
+warning: transaction executed locally, but may not be confirmed by the network yet
+
+```
 
 
 
