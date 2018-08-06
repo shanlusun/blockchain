@@ -170,13 +170,29 @@ warning: transaction executed locally, but may not be confirmed by the network y
 
 >调用byage方法，使用自定义index
 ```Bash
-$cleos push action eosio byage '["15"]' -p eosio@active
+$cleos push action eosio byage '["20"]' -p eosio@active
 
 executed transaction: d28f565ba80ef36b67803cadcd2d6d63837b05d5026a79c134bff2d4f88fa1bb  96 bytes  1177 us
 #         eosio <= eosio::byage                 {"age":15}
->> Checking age: 15
+>> Checking age: 20
 warning: transaction executed locally, but may not be confirmed by the network yet
+```
+查看nodeosd的日志如下：
+```Bash
+[(eosio,byage)->eosio]: CONSOLE OUTPUT BEGIN =====================
+Checking age: 20
+sunny is 20 years old
 
+```
+
+>调用agerange方法，使用自定义index
+```Bash
+$cleos push action eosio agerange '["15","25"]' -p eosio@active
+
+executed transaction: e250bf8d07ee996b951e303db47d5b33d735c3a8d10db9d1ce76455bff0fe8c8  104 bytes  3749 us
+#         eosio <= eosio::agerange              {"young":15,"old":25}
+>> sunny is 20 years old
+warning: transaction executed locally, but may not be confirmed by the network yet
 ```
 
 
