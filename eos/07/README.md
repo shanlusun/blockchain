@@ -55,6 +55,13 @@ transaction declares authority '{"actor":"target","permission":"active"}', but d
 3. 让target账户授权给hello合约特定权限
 
 ```Bash
+hello合约 -> target账户 -> appdemo合约
+   |            |
+   <- - - - - - -
+        授权
+```
+
+```Bash
 cleos set account permission target active '{"threshold": 1,"keys": [],"accounts": [{"permission":{"actor":"hello","permission":"eosio.code"},"weight":1}]}' owner -p target@owner
 ```
 >执行后可以查看target账户变化
@@ -84,13 +91,23 @@ cleos get table eosio eosio profile
 }
 ```
 
-**注意**：在给账户授予hello合约权限时，可以指定多key，做到多签名管理的形式，使用方式如下（这里只指定了一个key，多key时参考调整）：
+**注意**：由于我们在hello合约中调用了appdemo中的create方法，因此多次调用会报错：
 ```Bash
-cleos set account permission test active '{"threshold": 1,"keys": [{"key":"EOS8eHNwPjCvcQRnUP1feykKmKexWkRz5zXznK3GTJFPibut7kiaM", "weight":1}],"accounts": [{"permission":{"actor":"hello","permission":"eosio.code"},"weight":1}]}' owner -p test@owner
+cleos push action hello hi '["caller", "target"]' -p caller@active
 
+Error 3050003: eosio_assert_message assertion failure
+```
 
-cleos push action hello hi '["caller", "test"]' -p caller
+日志如下：
 
+```Bash
+1491136ms thread-0   http_plugin.cpp:406           handle_exception     ] Exception Details: 3050003 eosio_assert_message_exception: eosio_assert_message assertion failure
+assertion failure with message: Account already exists
+    {"s":"Account already exists"}
+    thread-0  wasm_interface.cpp:930 eosio_assert
+
+    {"_pending_console_output.str()":""}
+    thread-0  apply_context.cpp:62 exec_one
 ```
 
 

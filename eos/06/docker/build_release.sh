@@ -14,8 +14,8 @@ alias cleos='docker-compose -f docker-compose-local-eosio1.0.yaml exec keosd /op
 alias eosiocpp='docker-compose -f docker-compose-local-eosio1.0.yaml exec keosd /opt/eosio/bin/eosiocpp'
 
 #compile for contracts
-eosiocpp -o ${CONTRACT}.wast ${CONTRACT}/${CONTRACT}.cpp && 
-eosiocpp -g ${CONTRACT}.abi ${CONTRACT}/${CONTRACT}.cpp && 
+eosiocpp -o ${CONTRACT}/${CONTRACT}.wast ${CONTRACT}/${CONTRACT}.cpp && 
+eosiocpp -g ${CONTRACT}/${CONTRACT}.abi ${CONTRACT}/${CONTRACT}.cpp && 
 
 #deploy contract, defaults to 'account@active' permission
 cleos set contract ${ACCOUNT} ${CONTRACT}
