@@ -1,0 +1,17 @@
+{
+  "name": "eosjs-samples",
+  "version": "1.0.0",
+  "description": "samples for basic functions with eosjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eosjs"
+  ],
+  "author": "sunny sun",
+  "license": "MIT",
+  "dependencies": {
+    "eosjs": "^16.0.0"
+  }
+}

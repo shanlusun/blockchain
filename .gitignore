@@ -1,1 +1,7 @@
-*.DS_Store
+.idea
+.vscode
+.DS_Store
+.node-xml*
+
+node_modules
+build
