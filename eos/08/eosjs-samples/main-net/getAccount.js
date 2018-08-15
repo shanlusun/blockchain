@@ -18,3 +18,10 @@ eos.getAccount({account_name: 'eos42freedom'})
       console.log('eos42freedom permissions:', JSON.stringify(result.permissions[1].required_auth));
     })
     .catch(error => console.error(error));
+
+// async
+(async function () {
+  console.log('async:', await eos.getInfo({}));
+
+  console.log('accounts controlled by eosio:', await eos.getControlledAccounts('eosio'));
+})().catch(console.error);

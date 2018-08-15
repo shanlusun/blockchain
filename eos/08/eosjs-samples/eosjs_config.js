@@ -6,15 +6,21 @@ const key = process.env.PRI_KEY || '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP7
 
 const config = {
   // private keys used to request net
-  keyProvider: [key], // WIF string or array of keys..
-  // mainNet bp endpoint
-  httpEndpoint: httpEndpoint,
-  // mainNet chainId
-  chainId: chainId,
+  keyProvider: [key], // 配置私钥字符串
+
+  httpEndpoint: httpEndpoint, // mainNet bp endpoint
+  chainId: chainId, // 通过cleos get info可以获取chainId
+
   expireInSeconds: 60,
   broadcast: true,
   debug: false,
   sign: true,
+  authorization: null // 该参数用于在多签名情况下，识别签名帐号与权限,格式如：account@permission
+
+  // transactionHeaders: (expireInSeconds, callback) => {
+  //   callback(null/*error*/, headers) //手动设置交易记录头，该方法中的callback回调函数每次交易都会被调用
+  // },
+
 };
 
 const eos = Eos(config);

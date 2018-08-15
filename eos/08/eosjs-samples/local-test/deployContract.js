@@ -21,7 +21,6 @@ const abi = fs.readFileSync(`../../docker/appdemo/appdemo.abi`);
   await eos.setcode('eosio', 0, 0, wasm, options);
   await eos.setabi('eosio', JSON.parse(abi), options);
 
-
   // Fetch contract info
   console.log('contract deployed:', await eos.contract('eosio'));
 

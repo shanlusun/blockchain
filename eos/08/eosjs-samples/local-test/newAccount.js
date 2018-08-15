@@ -29,4 +29,5 @@ const pubKey = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV';
   console.log('new account info:', await eos.getAccount('hello'));
   console.log('new account info:', await eos.getAccount('token'));
 
+  console.log('accounts controlled by eosio:', await eos.getControlledAccounts('eosio'));
 })().catch(console.error);
