@@ -6,7 +6,7 @@ const eos = eosjs_config.eos;
 const pubKey = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV';
 
 // async
-(async function () {
+async function newAccount() {
 
   // call two actions in the same transaction
   await eos.transaction(tr => {
@@ -30,4 +30,8 @@ const pubKey = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV';
   console.log('new account info:', await eos.getAccount('token'));
 
   console.log('accounts controlled by eosio:', await eos.getControlledAccounts('eosio'));
-})().catch(console.error);
+}
+
+module.exports = {
+  newAccount
+};
