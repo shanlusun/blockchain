@@ -18,7 +18,7 @@ sh build_release.sh player ./oasis/contracts/Players
 * Market
 * Product
 * Game
-* eos.token OAS
+* eosio.token OAS
 
 >主要模块如下：
 ![图1](./images/module.jpeg "module")
