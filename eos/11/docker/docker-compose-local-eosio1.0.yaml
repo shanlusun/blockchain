@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  nodeosd:
+    image: eosio/eos-dev:latest
+    command: /opt/eosio/bin/nodeosd.sh --data-dir /opt/eosio/bin/data-dir -e --delete-all-blocks #--genesis-json /opt/eosio/bin/data-dir/genesis.json #--contracts-console #-e — Enable block production, even if the chain is stale
+    hostname: nodeosd
+    ports:
+      - 8888:8888
+      - 9876:9876
+    expose:
+      - "8888"
+    volumes:
+      - local-nodeos-data-volume:/opt/eosio/bin/data-dir
+      - ./config-local.ini:/opt/eosio/bin/data-dir/config.ini
+
+
+  keosd:
+    image: eosio/eos-dev:latest
+    command: /opt/eosio/bin/keosd --wallet-dir /opt/eosio/bin/data-dir --http-server-address=127.0.0.1:8900
+    hostname: keosd
+    links:
+      - nodeosd
+    volumes:
+      - local-keosd-data-volume:/opt/eosio/bin/data-dir
+      - ./appdemo:/appdemo
+      - ./oasis:/oasis
+
+volumes:
+ local-nodeos-data-volume:
+   external: true
+ local-keosd-data-volume:
+   external: true
