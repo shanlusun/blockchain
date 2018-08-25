@@ -20,12 +20,12 @@ namespace eosio {
    class token : public contract {
       public:
          token( account_name self ):contract(self){}
-
+         //@abi action
          void create( account_name issuer,
                       asset        maximum_supply);
-
+         //@abi action
          void issue( account_name to, asset quantity, string memo );
-
+         //@abi action
          void transfer( account_name from,
                         account_name to,
                         asset        quantity,
@@ -37,13 +37,15 @@ namespace eosio {
          inline asset get_balance( account_name owner, symbol_name sym )const;
 
       private:
+         //@abi table accounts i64
          struct account {
             asset    balance;
 
             uint64_t primary_key()const { return balance.symbol.name(); }
          };
 
-         struct currency_stats {
+         //@abi table stat i64
+         struct stat {
             asset          supply;
             asset          max_supply;
             account_name   issuer;
@@ -52,10 +54,12 @@ namespace eosio {
          };
 
          typedef eosio::multi_index<N(accounts), account> accounts;
-         typedef eosio::multi_index<N(stat), currency_stats> stats;
-
-         void sub_balance( account_name owner, asset value );
-         void add_balance( account_name owner, asset value, account_name ram_payer );
+         typedef eosio::multi_index<N(stat), stat> stats;
+         
+         //@abi action
+         void subbalance( account_name owner, asset value );
+         //@abi action
+         void addbalance( account_name owner, asset value, account_name ram_payer );
 
       public:
          struct transfer_args {

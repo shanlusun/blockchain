@@ -14,8 +14,8 @@ class hello : public eosio::contract {
          //action所带参数具体如下：
          //action(permssion_level, other_contract_account_name, method, args).send();
          action(
-             //这里{to, active}必须授权给当前合约{_self, eosio.code}，
-             //当前合约才能使用to账户的active权限调用其他合约
+             //这里{target, active}必须授权给当前合约{_self, eosio.code}，
+             //当前合约才能使用target账户的active权限调用其他合约
              permission_level{ target, N(active) },
              N(eosio), N(callme),
              std::make_tuple(target)

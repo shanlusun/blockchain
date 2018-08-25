@@ -6,22 +6,40 @@ namespace Oasis {
     void Marketplace::buy(account_name buyer, uint64_t productId) {
         productIndex products(_self, _self);
 
+        print("buy function,self is: ", name{ _self });
         auto iterator = products.find(productId);
         eosio_assert(iterator != products.end(), "The product not found");
 
         auto product = products.get(productId);
         eosio_assert(product.quantity > 0, "The product is out of stock");
+
+        print(" | Id: ", product.product_id);
+        print(" | Name: ", product.name.c_str());
+        print(" | Power: ", product.power);
+        print(" | Health: ", product.health);
+        print(" | Ability: ", product.ability.c_str());
+        print(" | Level up: ", product.level_up);
+        print(" | Quantity: ", product.quantity); 
+        print(" | Price: ", product.price);
+
         asset productPrice = asset(product.price, string_to_symbol(4, "OAS"));
 
-        action(vector<permission_level>(), N(token), N(transfer), make_tuple(buyer, _self, productPrice, string("buy"))).send();
+        action(
+            permission_level{ buyer, N(active) }, 
+            N(token), N(transfer), 
+            std::make_tuple(buyer, _self, productPrice, string("buyTest"))
+        ).send();
 
-        action(vector<permission_level>(), N(market), N(additem), make_tuple(buyer, 
-            product.product_id,
-            product.name,
-            product.power,
-            product.health,
-            product.ability,
-            product.level_up
+        action(
+            permission_level{ buyer, N(active) },  
+            N(player), N(additem), 
+            std::make_tuple(buyer, 
+                product.product_id,
+                product.name,
+                product.power,
+                product.health,
+                product.ability,
+                product.level_up
         )).send();
 
         update(buyer, product.product_id, -1);
@@ -72,6 +90,7 @@ namespace Oasis {
         auto iterator = products.find(product_id);
         eosio_assert(iterator != products.end(), "Product not found");
 
+        //TODO: check the 'product.quantity + quantity > 0'
         products.modify(iterator, account, [&](auto& product) {
             product.quantity += quantity;
         });
