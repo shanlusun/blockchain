@@ -115,6 +115,61 @@ executed transaction: 04d18a1e8530f9f3a091d52bb8f3f2d2e71bf2d2e23c7755d0920c8c44
 cleos push action game startpk '["2","testPK","player1","player2"]' -p player1@active
 ```
 
+6. 查看Games合约的pk table
+```Bash
+cleos get table game game pk -l 20
+```
+
+**根据pk的结果影响player的属性**
+我们希望根据pk的结果让失败者的player属性进行一定的损失，这需要调用Players合约的update方法来实现。
+具体来说这是一个合约之间的Action调用，但是Action又不能返回任何结果，如何知道update操作真的实际执行了呢？ 
+>可以通过查询Player的player table来获取update 这个Action的执行结果情况，这一点非常关键，可以看到数据库是Action之间传递执行结果的关键媒介。
+
+更新Games合约中的startpk方法，增加Action调用更新失败者的player属性，然后检查更新后的结果。
+
+实践步骤：
+1. 更新Games合约中startup方法，增加Action调用update Loser在Players合约中的属性数据。
+
+2. 在Action代码段，后面增加访问Players合约的Loser 数据属性并打印，目的：查看是否立即可以看到属性变化？
+
+3. 将player1和player2授权给game合约
+由于game合约需要更新loser的player属性信息，在Players合约中的update方法有‘require_auth’的约束，因此需要使用loser的账户调用Players合约的update。loser可能是player1或者player2，因此两个账户都需要授权才可以。
+
+```Bash
+cleos set account permission player1 active '{"threshold": 1,"keys": [{"key": "EOS7UN5ZY6WYpVhjkjPG4bh5rQxHgAeFKnjLBNok22cATD82JPjai","weight": 1}],"accounts": [{"permission":{"actor":"game","permission":"eosio.code"},"weight":1}]}' owner -p player1@owner
+
+cleos set account permission player2 active '{"threshold": 1,"keys": [{"key": "EOS7UN5ZY6WYpVhjkjPG4bh5rQxHgAeFKnjLBNok22cATD82JPjai","weight": 1}],"accounts": [{"permission":{"actor":"game","permission":"eosio.code"},"weight":1}]}' owner -p player2@owner
+```
+
+4. 在pk之前查看两个player的属性
+```Bash
+cleos push action player getplayer '["player1"]' -p player1@active
+
+cleos push action player getplayer '["player2"]' -p player2@active
+```
+
+5. 调用startpk，然后观察loser的player属性变化(例子中player2的Health和Energy都从600降低到100))
+```Bash
+cleos push action game startpk '["15","testPK","player1","player2"]' -p player1@active
+executed transaction: e5a62e59af87b85ba61268b9975324518b74b94ce185ef4d65daf4b2f04969cb  128 bytes  7260 us
+#          game <= game::startpk                {"id":15,"pkname":"testPK","player1":"player1","player2":"player2"}
+>> random: 29 | player1: Username: player1 Level: 4 Health: 1010 Energy: 1120 | player2: Username: player2 Level: 2 Health: 600 Energy: 600 | Winner is: player1 | Loser is: player2 | Loser after updated: Username: player2 Level: 2 Health: 600 Energy: 600
+#        player <= player::update               {"account":"player2","level":2,"healthPoints":500,"energyPoints":500}
+
+```
+**注意**：从日志可以看出，打印的‘Loser after updated: Username: player2 Level: 2 Health: 600 Energy: 600’并不是我们预期的，更新之后的信息，这说明更新的Action执行在我们获取Loser信息之后，也就是说：startpk方法中Action的调用是跟当前的startpk Action一起提交在一个Transaction中执行的。
+
+6. 查看Loser的player的属性变化(以上步骤用例中为player2)
+```Bash
+cleos push action player getplayer '["player2"]' -p player2@active
+
+executed transaction: dc9c7b8b8fc2f920b9dda4a260904ea38a7bbb7e527f7bf9b822570157f0a321  104 bytes  2536 us
+#        player <= player::getplayer            {"account":"player2"}
+>> Username: player2 Level: 2 Health: 100 Energy: 100 No Abilities Empty inventory
+1520536ms thread-0   main.cpp:382                  print_result  
+```
+
+
 
 
 

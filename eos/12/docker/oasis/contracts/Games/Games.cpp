@@ -38,27 +38,49 @@ namespace Oasis {
             result = (random%4 == 0 ? -1 : 1);
         }
 
-        account_name winner;
+        player* winner;
+        player* loser;
         if (result > 0)
         {
-            winner = player1;
-            print(" | Winner is: ", name{player1});
+            winner = &currentPlayer1;
+            loser = &currentPlayer2;
+            
         } else {
-            winner = player2;
-            print(" | Winner is: ", name{player2});
+            winner = &currentPlayer2;
+            loser = &currentPlayer1;
         }
+        print(" | Winner is: ", name{winner->account_name});
 
         //save the pk result to pk table
         pkIndex pk(_self, _self);
 
-        pk.emplace(player1, [&](auto &pk) {
+        pk.emplace(winner->account_name, [&](auto &pk) {
             pk.pk_id = id;
             pk.pkname = pkname;
             pk.player1 = player1;
             pk.player2 = player2;
-            pk.winner = winner;
+            pk.winner = winner->account_name;
             pk.timestamp = current_time();
         });
+
+        //update the loser's player info
+        print(" | Loser is: ", name{loser->account_name});
+        action(
+            permission_level{ loser->account_name, N(active) }, 
+            N(player), N(update), 
+            std::make_tuple(loser->account_name, loser->level, loser->health_points - 100, loser->energy_points - 100)
+        ).send();
+
+        //get the update result and print
+        //you will find that the result is not updated, the reason is that: the above 'Action' call is not executed currently.
+        auto iterator3 = players.find(loser->account_name);
+        eosio_assert(iterator3 != players.end(), "Address for target player not found");
+
+        auto updatedLoser = players.get(loser->account_name);
+        print(" | Loser after updated: Username: ", updatedLoser.username.c_str());
+        print(" Level: ", updatedLoser.level);
+        print(" Health: ", updatedLoser.health_points);
+        print(" Energy: ", updatedLoser.energy_points);
     }
 
     void Games::getpkresult(const uint64_t id) {
@@ -73,5 +95,16 @@ namespace Oasis {
         print(" | player2: ", name{currentPk.player2});
         print(" | PK name: ", currentPk.pkname.c_str());
         print(" | Time: ", currentPk.timestamp);
+    }
+
+    void Games::removepk(account_name account, const uint64_t id) {
+        require_auth(account);
+
+        pkIndex pk(_self, _self);
+
+        auto iterator = pk.find(id);
+        eosio_assert(iterator != pk.end(), "pk_id not found");
+
+        pk.erase(iterator); 
     }
 }

@@ -20,7 +20,10 @@ namespace Oasis {
 
             //@abi action
             void getpkresult(const uint64_t id);
-
+            
+            //@abi action
+            void removepk(account_name account, const uint64_t id);
+            
             inline int64_t rand();
 
             //@abi table pk i64
@@ -81,5 +84,5 @@ namespace Oasis {
         return int64_t(*p64);
     }
 
-    EOSIO_ABI(Games, (startpk)(getpkresult));
+    EOSIO_ABI(Games, (startpk)(getpkresult)(removepk));
 }
