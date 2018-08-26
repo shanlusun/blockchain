@@ -47,10 +47,10 @@ executed transaction: b7ba8ce6901e33a8dc04ebb9025445edca1884d8b8b4672f03131a479c
 
 
 **Games合约**
-1. 创建一个新的game账户
-```Bash
-cleos create account eosio game EOS8eHNwPjCvcQRnUP1feykKmKexWkRz5zXznK3GTJFPibut7kiaM EOS7UN5ZY6WYpVhjkjPG4bh5rQxHgAeFKnjLBNok22cATD82JPjai
-```
+考虑Games合约如何获取Players合约中的player数据？ 
+下一小节会给出实现方式。
+
+
 
 
 
